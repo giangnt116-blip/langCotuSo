@@ -1,0 +1,171 @@
+import React from 'react';
+import { motion } from 'motion/react';
+import { Compass, Sparkles, MapPin, CheckCircle2, Users, BookOpen } from 'lucide-react';
+import { IMAGE_ASSETS } from '../data/imageAssets';
+import { CHARACTERS } from '../data/culturalData';
+import { CulturalImage } from './CulturalImage';
+
+interface HeroSectionProps {
+  onStartJourney: () => void;
+  onOpenNotebook: () => void;
+  studentName: string;
+  onChangeName: (name: string) => void;
+}
+
+export const HeroSection: React.FC<HeroSectionProps> = ({
+  onStartJourney,
+  onOpenNotebook,
+  studentName,
+  onChangeName,
+}) => {
+  return (
+    <div id="hero-view" className="relative w-full overflow-hidden bg-[#F5F2ED] text-[#2F2F2F]">
+      {/* Visual Canvas Hero Background & Interactive Overlays */}
+      <div className="relative w-full max-w-7xl mx-auto px-4 sm:px-6 pt-6 pb-12 lg:py-12">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+          
+          {/* Left Column: Title, Subtitle, Student Input & Primary CTA (Clean 45% space) */}
+          <motion.div
+            initial={{ opacity: 0, y: 15 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            className="lg:col-span-6 z-10 flex flex-col justify-center space-y-6"
+          >
+            {/* National Heritage Badge */}
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#EAE4D9] border border-[#D5CCBC] text-xs font-semibold text-[#7A4E38] w-fit shadow-xs">
+              <Sparkles className="w-3.5 h-3.5 text-[#B35C44]" />
+              <span>Không gian Giáo dục Di sản Văn hóa số</span>
+            </div>
+
+            {/* Main Headline */}
+            <div>
+              <h1 className="text-3xl sm:text-4xl lg:text-5xl font-serif font-bold text-[#2F2F2F] leading-[1.15] tracking-tight">
+                LÀNG CƠ TU SỐ
+              </h1>
+              <h2 className="text-lg sm:text-xl font-serif text-[#B35C44] mt-2 font-semibold">
+                Hành trình khám phá văn hóa đại ngàn Trường Sơn
+              </h2>
+            </div>
+
+            {/* Descriptive Body */}
+            <p className="text-sm sm:text-base text-[#555047] leading-relaxed max-w-xl">
+              Cùng <strong>Chú Bh’ling Avel</strong> và hai bạn học sinh <strong>Minh & An</strong> bước qua 8 trạm trải nghiệm: từ kiến trúc Nhà Gươl, kỹ nghệ dệt zèng luồn cườm, vũ điệu Tân’tung Da’dá đến thanh âm cồng chiêng và nghệ thuật Nói lý – Hát lý độc đáo.
+            </p>
+
+            {/* Student Name Input & Onboarding Card */}
+            <div className="p-5 rounded-2xl bg-[#FAF8F5] border border-[#E3DCD2] shadow-sm space-y-3.5">
+              <label htmlFor="student-name-input" className="block text-xs font-bold uppercase tracking-wider text-[#7A4E38]">
+                Tên học sinh khám phá:
+              </label>
+              <div className="flex flex-col sm:flex-row gap-2.5">
+                <input
+                  id="student-name-input"
+                  type="text"
+                  value={studentName}
+                  onChange={(e) => onChangeName(e.target.value)}
+                  placeholder="Nhập họ và tên học sinh..."
+                  className="flex-1 px-3.5 py-2.5 rounded-xl bg-white border border-[#D5CCBC] text-[#2F2F2F] text-sm focus:outline-none focus:border-[#B35C44] focus:ring-2 focus:ring-[#B35C44]/20 transition-all placeholder:text-[#9E9589]"
+                />
+                <button
+                  type="button"
+                  id="btn-start-hero-cta"
+                  onClick={onStartJourney}
+                  className="px-6 py-2.5 rounded-xl bg-gradient-to-r from-[#B35C44] to-[#964732] hover:from-[#C5664E] hover:to-[#B35C44] text-white text-sm font-bold shadow-sm transition-all flex items-center justify-center gap-2 shrink-0 active:scale-95 cursor-pointer"
+                >
+                  <Compass className="w-4 h-4" />
+                  BẮT ĐẦU HÀNH TRÌNH
+                </button>
+              </div>
+              <p className="text-[11px] text-[#736B60]">
+                * Nhập tên để in trang trọng lên Giấy chứng nhận <em>"Người bạn văn hóa Cơ Tu"</em> sau khi vượt qua 8 trạm.
+              </p>
+            </div>
+
+            {/* Quick Feature Stats */}
+            <div className="grid grid-cols-3 gap-3 pt-2 border-t border-[#DDD5C7]">
+              <div className="flex flex-col">
+                <span className="text-xl sm:text-2xl font-serif font-bold text-[#B35C44]">08 Trạm</span>
+                <span className="text-[11px] text-[#736B60] font-medium">Di sản trọng điểm</span>
+              </div>
+              <div className="flex flex-col">
+                <span className="text-xl sm:text-2xl font-serif font-bold text-[#2D4232]">08 Dấu ấn</span>
+                <span className="text-[11px] text-[#736B60] font-medium">Khắc gỗ số thu thập</span>
+              </div>
+              <div className="flex flex-col">
+                <span className="text-xl sm:text-2xl font-serif font-bold text-[#5A5A40]">04 Di sản</span>
+                <span className="text-[11px] text-[#736B60] font-medium">Cấp Quốc gia</span>
+              </div>
+            </div>
+          </motion.div>
+
+          {/* Right Column: Hero Visual Illustration (Mandated Y4-01) */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.96 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.6, delay: 0.1 }}
+            className="lg:col-span-6 flex flex-col items-center"
+          >
+            <div className="w-full relative">
+              <CulturalImage
+                asset={IMAGE_ASSETS.hero}
+                priority={true}
+                className="w-full shadow-lg rounded-2xl overflow-hidden border border-[#E3DCD2] bg-white"
+              />
+            </div>
+          </motion.div>
+        </div>
+
+        {/* Characters Overview Strip (Mandated by Y3) */}
+        <div className="mt-12 pt-8 border-t border-[#DDD5C7]">
+          <div className="flex items-center justify-between mb-4">
+            <div className="flex items-center gap-2">
+              <Users className="w-4 h-4 text-[#B35C44]" />
+              <h3 className="text-sm font-bold uppercase tracking-wider text-[#2F2F2F]">
+                Đồng hành cùng bạn trong hành trình (Bộ nhân vật văn hóa)
+              </h3>
+            </div>
+            <button
+              type="button"
+              id="btn-open-notebook-link"
+              onClick={onOpenNotebook}
+              className="text-xs text-[#B35C44] hover:underline flex items-center gap-1 font-semibold"
+            >
+              <BookOpen className="w-3.5 h-3.5" />
+              Xem Sổ Hành Trình
+            </button>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-3.5">
+            {CHARACTERS.map((char) => (
+              <div
+                key={char.id}
+                className="p-4 rounded-xl bg-[#FAF8F5] border border-[#E3DCD2] flex flex-col justify-between hover:border-[#B35C44] transition-all shadow-2xs"
+              >
+                <div>
+                  <div className="flex items-center gap-2.5 mb-2">
+                    <div className="w-8 h-8 rounded-full bg-[#EAE4D9] flex items-center justify-center font-bold text-xs text-[#7A4E38] border border-[#D5CCBC]">
+                      {char.name[0]}
+                    </div>
+                    <div>
+                      <h4 className="text-xs font-bold text-[#2F2F2F] leading-tight">{char.name}</h4>
+                      <span className="text-[10px] text-[#B35C44] font-semibold block">{char.role}</span>
+                    </div>
+                  </div>
+                  <p className="text-[11px] text-[#555047] leading-relaxed line-clamp-3">
+                    {char.description}
+                  </p>
+                </div>
+                <div className="mt-3 pt-2 border-t border-[#EFEAE2]">
+                  <p className="text-[10px] italic text-[#736B60] line-clamp-2">
+                    "{char.greeting}"
+                  </p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+      </div>
+    </div>
+  );
+};

@@ -1,0 +1,6 @@
+{
+  "name": "Làng Cơ Tu Số – Hành Trình Khám Phá Văn Hóa Đại Ngàn",
+  "description": "Ứng dụng web giáo dục khám phá văn hóa Cơ Tu tương tác với 8 trạm học tập, bản đồ số, minigame dệt, cồng chiêng, nói lý hát lý, nhà Gươl và chứng nhận hành trình.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
