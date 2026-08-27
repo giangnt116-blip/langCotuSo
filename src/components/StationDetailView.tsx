@@ -8,6 +8,7 @@ import { WeavingMinigame } from './games/WeavingMinigame';
 import { GongRhythmMinigame } from './games/GongRhythmMinigame';
 import { SpeakingSingingMinigame } from './games/SpeakingSingingMinigame';
 import { DancePoseMinigame } from './games/DancePoseMinigame';
+import { HeritageKnowledgeGallery } from './HeritageKnowledgeGallery';
 import {
   ArrowLeft,
   ArrowRight,
@@ -322,6 +323,9 @@ export const StationDetailView: React.FC<StationDetailViewProps> = ({
                 ))}
               </div>
             </div>
+
+            {/* Visual Knowledge Diagrams & Heritage Illustrations for this Station */}
+            <HeritageKnowledgeGallery stationId={station.id} />
 
             {/* Detailed Sections */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">

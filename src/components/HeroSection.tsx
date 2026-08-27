@@ -1,9 +1,10 @@
 import React from 'react';
 import { motion } from 'motion/react';
-import { Compass, Sparkles, MapPin, CheckCircle2, Users, BookOpen } from 'lucide-react';
+import { Compass, Sparkles, MapPin, CheckCircle2, Users, BookOpen, GraduationCap } from 'lucide-react';
 import { IMAGE_ASSETS } from '../data/imageAssets';
 import { CHARACTERS } from '../data/culturalData';
 import { CulturalImage } from './CulturalImage';
+import { FptSchoolLogo } from './FptSchoolLogo';
 
 interface HeroSectionProps {
   onStartJourney: () => void;
@@ -21,7 +22,38 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
   return (
     <div id="hero-view" className="relative w-full overflow-hidden bg-[#F5F2ED] text-[#2F2F2F]">
       {/* Visual Canvas Hero Background & Interactive Overlays */}
-      <div className="relative w-full max-w-7xl mx-auto px-4 sm:px-6 pt-6 pb-12 lg:py-12">
+      <div className="relative w-full max-w-7xl mx-auto px-4 sm:px-6 pt-6 pb-12 lg:py-10">
+        
+        {/* Project Authorship Banner - Lớp 9A2 Trường FPT Schools */}
+        <motion.div
+          initial={{ opacity: 0, y: -10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.4 }}
+          className="mb-6 p-3 sm:p-4 rounded-2xl bg-[#FAF8F5] border border-[#E3DCD2] shadow-xs flex flex-wrap items-center justify-between gap-3"
+        >
+          <div className="flex items-center gap-3">
+            <FptSchoolLogo variant="compact" className="h-8 sm:h-9 w-auto shrink-0" />
+            <div className="border-l border-[#DDD5C7] pl-3">
+              <div className="flex items-center gap-2">
+                <span className="text-xs font-black text-[#F37021] uppercase tracking-wide font-sans">
+                  FPT SCHOOLS
+                </span>
+                <span className="px-2 py-0.5 rounded-full text-[11px] font-bold bg-[#FAF2EB] text-[#B35C44] border border-[#B35C44]/30">
+                  Lớp 9A2
+                </span>
+              </div>
+              <p className="text-[11px] font-semibold text-[#0066B2] italic">
+                “Trải nghiệm để trưởng thành”
+              </p>
+            </div>
+          </div>
+
+          <div className="flex items-center gap-2 text-xs text-[#555047] font-medium bg-[#EFECE6] px-3 py-1.5 rounded-xl border border-[#DDD5C7]">
+            <GraduationCap className="w-4 h-4 text-[#B35C44] shrink-0" />
+            <span>Sản phẩm số học tập sáng tạo & Di sản văn hóa</span>
+          </div>
+        </motion.div>
+
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
           
           {/* Left Column: Title, Subtitle, Student Input & Primary CTA (Clean 45% space) */}

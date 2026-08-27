@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { UserProgress } from '../types';
 import { CULTURAL_STAMPS, STATIONS_DATA } from '../data/culturalData';
+import { FptSchoolLogo } from './FptSchoolLogo';
 import { X, BookOpen, CheckCircle2, Lock, Sparkles, Award, FileText } from 'lucide-react';
 
 interface JourneyNotebookModalProps {
@@ -37,12 +38,15 @@ export const JourneyNotebookModal: React.FC<JourneyNotebookModalProps> = ({
               📖
             </div>
             <div>
-              <div className="flex items-center gap-2">
+              <div className="flex flex-wrap items-center gap-2">
                 <h3 className="text-base sm:text-lg font-serif font-bold text-[#2F2F2F]">
                   Sổ Hành Trình Khám Phá Văn Hóa
                 </h3>
                 <span className="px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-[#EAE4D9] text-[#7A4E38] border border-[#D5CCBC]">
                   {completedCount}/8 Dấu ấn
+                </span>
+                <span className="hidden sm:inline-flex items-center gap-1 px-2 py-0.5 rounded-md bg-[#FAF2EB] text-[10px] font-bold text-[#B35C44] border border-[#B35C44]/30">
+                  Lớp 9A2 • FPT Schools
                 </span>
               </div>
               <p className="text-xs text-[#736B60]">
@@ -51,15 +55,18 @@ export const JourneyNotebookModal: React.FC<JourneyNotebookModalProps> = ({
             </div>
           </div>
 
-          <button
-            type="button"
-            id="btn-close-notebook"
-            onClick={onClose}
-            className="p-2 text-[#736B60] hover:text-[#2F2F2F] hover:bg-[#EFECE6] rounded-xl transition-colors cursor-pointer"
-            aria-label="Đóng sổ hành trình"
-          >
-            <X className="w-5 h-5" />
-          </button>
+          <div className="flex items-center gap-2">
+            <FptSchoolLogo variant="compact" className="h-6 w-auto hidden md:block" />
+            <button
+              type="button"
+              id="btn-close-notebook"
+              onClick={onClose}
+              className="p-2 text-[#736B60] hover:text-[#2F2F2F] hover:bg-[#EFECE6] rounded-xl transition-colors cursor-pointer"
+              aria-label="Đóng sổ hành trình"
+            >
+              <X className="w-5 h-5" />
+            </button>
+          </div>
         </div>
 
         {/* Tabs Bar */}

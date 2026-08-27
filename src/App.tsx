@@ -13,6 +13,7 @@ import { StationDetailView } from './components/StationDetailView';
 import { CompletionCertificateView } from './components/CompletionCertificateView';
 import { JourneyNotebookModal } from './components/JourneyNotebookModal';
 import { CulturalTutorModal } from './components/CulturalTutorModal';
+import { FptSchoolLogo } from './components/FptSchoolLogo';
 
 const STORAGE_KEY = 'co_tu_heritage_progress_v1';
 
@@ -194,27 +195,56 @@ export default function App() {
         )}
       </main>
 
-      {/* Footer in Natural Tones Forest Green */}
-      <footer className="bg-[#2D4232] border-t border-[#3D5643] text-[#D3DFCE] text-xs py-8 px-4 sm:px-6">
-        <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
-          <div className="flex items-center gap-3">
-            <div className="w-8 h-8 rounded-lg bg-[#B35C44] text-white flex items-center justify-center font-serif font-bold text-xs shadow-sm">
-              CT
+      {/* Footer in Natural Tones Forest Green with FPT Schools & Class 9A2 Attribution */}
+      <footer className="bg-[#243528] border-t border-[#364D3B] text-[#D3DFCE] text-xs py-8 px-4 sm:px-6">
+        <div className="max-w-7xl mx-auto space-y-6">
+          <div className="flex flex-col md:flex-row items-center justify-between gap-6 pb-6 border-b border-[#364D3B]">
+            {/* Project Identity */}
+            <div className="flex items-center gap-3.5">
+              <div className="w-10 h-10 rounded-xl bg-[#B35C44] text-white flex items-center justify-center font-serif font-bold text-sm shadow-xs shrink-0">
+                CT
+              </div>
+              <div>
+                <p className="font-serif font-bold text-[#FAF8F5] text-base tracking-wide">
+                  LÀNG CƠ TU SỐ – HÀNH TRÌNH KHÁM PHÁ VĂN HÓA ĐẠI NGÀN
+                </p>
+                <p className="text-xs text-[#A6BAA4] mt-0.5">
+                  Dự án học tập số hóa di sản văn hóa Cơ Tu dành cho học sinh
+                </p>
+              </div>
             </div>
-            <div>
-              <p className="font-serif font-bold text-[#FAF8F5] text-sm tracking-wide">
-                LÀNG CƠ TU SỐ – HÀNH TRÌNH KHÁM PHÁ VĂN HÓA ĐẠI NGÀN
-              </p>
-              <p className="text-[11px] text-[#A6BAA4]">
-                Nền tảng Giáo dục Di sản Văn hóa số hóa dành cho Học sinh THCS
-              </p>
+
+            {/* School & Class Credit with Logo */}
+            <div className="bg-[#1D2B20] px-4 py-3 rounded-2xl border border-[#3A533F] flex items-center gap-4 shadow-xs">
+              <div className="bg-white p-1.5 rounded-xl shadow-2xs">
+                <FptSchoolLogo variant="compact" className="h-9 w-auto" />
+              </div>
+              <div className="flex flex-col">
+                <div className="flex items-center gap-2">
+                  <span className="text-xs font-black text-[#F37021] uppercase tracking-wide font-sans">
+                    FPT SCHOOLS
+                  </span>
+                  <span className="px-2 py-0.5 rounded-full text-[11px] font-bold bg-[#FAF8F5] text-[#B35C44]">
+                    LỚP 9A2
+                  </span>
+                </div>
+                <p className="text-[11px] font-bold text-[#62B3ED] italic mt-0.5">
+                  Trải nghiệm để trưởng thành
+                </p>
+                <span className="text-[10px] text-[#A6BAA4]">
+                  Đơn vị sáng tạo & thực hiện sản phẩm số
+                </span>
+              </div>
             </div>
           </div>
 
-          <div className="flex flex-wrap items-center gap-4 text-[11px] text-[#B8CAB6]">
-            <span>© 2026 Dự án Di sản số Cơ Tu</span>
-            <span>•</span>
-            <span>Tư liệu chuẩn hóa: Cục Di sản văn hóa & Bảo tàng Điêu khắc</span>
+          <div className="flex flex-col sm:flex-row items-center justify-between gap-3 text-[11px] text-[#97AC95]">
+            <span>© 2026 Dự án Di sản số Cơ Tu • Thực hiện bởi Tập thể Lớp 9A2 Trường FPT</span>
+            <div className="flex items-center gap-3">
+              <span>Tư liệu tham khảo chuẩn mực: Cục Di sản Văn hóa</span>
+              <span>•</span>
+              <span>Bảo tàng Điêu khắc Đà Nẵng</span>
+            </div>
           </div>
         </div>
       </footer>

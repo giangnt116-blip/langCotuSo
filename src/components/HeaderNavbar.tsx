@@ -1,6 +1,7 @@
 import React from 'react';
 import { BookOpen, Sparkles, MapPin, Award, MessageCircle, Volume2, VolumeX } from 'lucide-react';
 import { UserProgress } from '../types';
+import { FptSchoolLogo } from './FptSchoolLogo';
 
 interface HeaderNavbarProps {
   progress: UserProgress;
@@ -28,29 +29,44 @@ export const HeaderNavbar: React.FC<HeaderNavbarProps> = ({
     <header className="sticky top-0 z-40 bg-[#FAF8F5]/90 backdrop-blur-md border-b border-[#E3DCD2] text-[#2F2F2F] shadow-xs">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between gap-4">
         {/* Brand / Logo */}
-        <button
-          type="button"
-          id="btn-nav-home"
-          onClick={onNavigateHome}
-          className="flex items-center gap-3 text-left group focus:outline-none"
-        >
-          <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[#B35C44] to-[#8C3F2B] flex items-center justify-center text-white shadow-sm border border-[#D58C77] group-hover:scale-105 transition-transform">
-            <span className="font-serif font-bold text-lg tracking-wider">CT</span>
-          </div>
-          <div>
-            <div className="flex items-center gap-1.5">
-              <span className="font-serif font-bold text-sm sm:text-base tracking-wide text-[#2F2F2F]">
-                LÀNG CƠ TU SỐ
+        <div className="flex items-center gap-3">
+          <button
+            type="button"
+            id="btn-nav-home"
+            onClick={onNavigateHome}
+            className="flex items-center gap-2.5 text-left group focus:outline-none cursor-pointer"
+          >
+            <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-[#B35C44] to-[#8C3F2B] flex items-center justify-center text-white shadow-xs border border-[#D58C77] group-hover:scale-105 transition-transform">
+              <span className="font-serif font-bold text-base tracking-wider">CT</span>
+            </div>
+            <div>
+              <div className="flex items-center gap-1.5">
+                <span className="font-serif font-bold text-sm sm:text-base tracking-wide text-[#2F2F2F]">
+                  LÀNG CƠ TU SỐ
+                </span>
+                <span className="hidden xl:inline-block text-[10px] uppercase font-bold tracking-widest px-2 py-0.5 rounded bg-[#EAE4D9] text-[#7A503A] border border-[#D5CCBC]">
+                  Di sản Đại ngàn
+                </span>
+              </div>
+              <p className="text-[10px] text-[#6B665E] hidden sm:block">
+                Hành trình khám phá văn hóa Trường Sơn
+              </p>
+            </div>
+          </button>
+
+          {/* FPT Schools & Class 9A2 Affiliation Tag */}
+          <div className="hidden sm:flex items-center gap-2 pl-3 border-l border-[#DDD5C7]">
+            <FptSchoolLogo variant="compact" className="h-6 w-auto" />
+            <div className="flex flex-col">
+              <span className="text-[10px] font-extrabold text-[#F37021] leading-none uppercase tracking-tight font-sans">
+                FPT SCHOOLS
               </span>
-              <span className="hidden md:inline-block text-[10px] uppercase font-bold tracking-widest px-2 py-0.5 rounded bg-[#EAE4D9] text-[#7A503A] border border-[#D5CCBC]">
-                Di sản Đại ngàn
+              <span className="text-[10px] font-bold text-[#0066B2] leading-none mt-0.5">
+                Lớp 9A2
               </span>
             </div>
-            <p className="text-[11px] text-[#6B665E] hidden sm:block">
-              Hành trình khám phá văn hóa Trường Sơn
-            </p>
           </div>
-        </button>
+        </div>
 
         {/* Center Nav Links */}
         <nav className="hidden lg:flex items-center gap-1 bg-[#EFECE6] p-1 rounded-xl border border-[#DDD5C7]">

@@ -1,6 +1,6 @@
 {
   "name": "Làng Cơ Tu Số – Hành Trình Khám Phá Văn Hóa Đại Ngàn",
-  "description": "Ứng dụng web giáo dục khám phá văn hóa Cơ Tu tương tác với 8 trạm học tập, bản đồ số, minigame dệt, cồng chiêng, nói lý hát lý, nhà Gươl và chứng nhận hành trình.",
+  "description": "Sản phẩm số học tập và giáo dục di sản văn hóa Cơ Tu của học sinh Lớp 9A2 Trường FPT Schools, bao gồm 8 trạm khám phá, bản đồ tương tác, minigame âm nhạc, dệt cườm và chứng nhận số.",
   "requestFramePermissions": [],
   "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
 }
