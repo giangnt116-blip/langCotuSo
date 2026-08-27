@@ -19,12 +19,12 @@ export const CHARACTERS: Character[] = [
     greeting: 'Chào chú Avel! Cháu đã chuẩn bị sẵn cuốn sổ hành trình để thu thập đủ 8 dấu ấn văn hóa hôm nay rồi ạ!',
   },
   {
-    id: 'student_an',
-    name: 'An',
-    role: 'Học sinh khám phá (Lớp 7)',
-    description: 'Bạn học cùng lớp tỉ mỉ, yêu thích nghệ thuật dệt thổ cẩm zèng cườm, các điệu múa và những câu chuyện tri thức bản địa.',
-    avatarSeed: 'an',
-    greeting: 'Cháu rất háo hức được ngắm tận mắt hoa văn cườm trên thổ cẩm và trải nghiệm điệu múa Tân’tung Da’dá!',
+    id: 'companion_kiensang',
+    name: 'Kiến Sáng',
+    role: 'Bạn đồng hành FPT Schools',
+    description: 'Người bạn nhỏ thông minh, hiếu học và tràn đầy năng lượng, luôn sát cánh cùng học sinh khám phá những điều kỳ thú của văn hóa Cơ Tu.',
+    avatarSeed: 'kiensang',
+    greeting: 'Chào các bạn! Mình là Kiến Sáng, chúng mình cùng chú Avel và Già làng khám phá trọn vẹn 8 trạm di sản Cơ Tu nhé!',
   },
   {
     id: 'artisan_elder',
@@ -249,9 +249,9 @@ export const STATIONS_DATA: Station[] = [
         text: 'Cháu quan sát tinh ý lắm! Người Cơ Tu làm mái nhà Gươl lợp bằng lá nón rừng hoặc lá mây đan tỉ mỉ, có hình dáng như mu rùa hoặc cánh chim tring bay lượn.',
       },
       {
-        speaker: 'An',
-        avatar: 'an',
-        role: 'Học sinh',
+        speaker: 'Kiến Sáng',
+        avatar: 'kiensang',
+        role: 'Bạn đồng hành',
         text: 'Cột gỗ lớn ở giữa nhà có chạm khắc rất nhiều hình muông thú và người múa đúng không chú?',
       },
       {
@@ -361,12 +361,12 @@ export const STATIONS_DATA: Station[] = [
         speaker: 'Bà ALăng Thị Pơr',
         avatar: 'por',
         role: 'Nghệ nhân Dệt',
-        text: 'Chào cháu An, cháu Minh! Lại đây xem bà dệt tấm zèng để may áo cho lễ hội mới nào.',
+        text: 'Chào cháu Kiến Sáng và các bạn học sinh! Lại đây xem bà dệt tấm zèng để may áo cho lễ hội mới nào.',
       },
       {
-        speaker: 'An',
-        avatar: 'an',
-        role: 'Học sinh',
+        speaker: 'Kiến Sáng',
+        avatar: 'kiensang',
+        role: 'Bạn đồng hành',
         text: 'Bà ơi, cháu thấy bà không dùng cửi đứng như dưới xuôi mà chân duỗi thẳng, dây đai buộc vòng quanh lưng ạ?',
       },
       {
@@ -468,9 +468,9 @@ export const STATIONS_DATA: Station[] = [
         text: 'Nghe tiếng trống k’tu rộn rã rồi kìa! Cả làng đang tập trung múa Tân’tung Da’dá mừng ngày hội lớn.',
       },
       {
-        speaker: 'An',
-        avatar: 'an',
-        role: 'Học sinh',
+        speaker: 'Kiến Sáng',
+        avatar: 'kiensang',
+        role: 'Bạn đồng hành',
         text: 'Chú ơi, các cô các chị múa Da’dá giơ hai bàn tay lên trời có ý nghĩa gì ạ?',
       },
       {
@@ -570,9 +570,9 @@ export const STATIONS_DATA: Station[] = [
         text: 'Đúng rồi Minh, bộ cồng chiêng của làng đúc bằng đồng tốt, có độ vang xa hàng chục dặm. Khi tiếng chiêng gióng lên, khắp các nóc nhà đều biết làng đang có việc vui.',
       },
       {
-        speaker: 'An',
-        avatar: 'an',
-        role: 'Học sinh',
+        speaker: 'Kiến Sáng',
+        avatar: 'kiensang',
+        role: 'Bạn đồng hành',
         text: 'Chiếc trống to treo cạnh cột cái có hai mặt bịt da trâu tên là gì vậy chú?',
       },
       {
@@ -672,9 +672,9 @@ export const STATIONS_DATA: Station[] = [
         text: 'Ta không mắng mỏ gay gắt, mà mượn hình ảnh con chim cu cu, cây măng rừng để chỉ ra điều phải trái. Khi nghe lời ca có lý, hai bên bắt tay nhau uống chén rượu tà-vạt, thế là làng lại êm ấm!',
       },
       {
-        speaker: 'An',
-        avatar: 'an',
-        role: 'Học sinh',
+        speaker: 'Kiến Sáng',
+        avatar: 'kiensang',
+        role: 'Bạn đồng hành',
         text: 'Thật là một nét văn hóa ứng xử nhân văn và hòa nhã quá ạ!',
       },
     ],
@@ -767,9 +767,9 @@ export const STATIONS_DATA: Station[] = [
         text: 'Hình ảnh con người và chim muông đã in sâu trong tâm trí người nghệ nhân từ lúc còn nhỏ rồi cháu ạ. Mỗi nét đục là một câu chuyện về lao động.',
       },
       {
-        speaker: 'An',
-        avatar: 'an',
-        role: 'Học sinh',
+        speaker: 'Kiến Sáng',
+        avatar: 'kiensang',
+        role: 'Bạn đồng hành',
         text: 'Còn chiếc gùi sau lưng chú có hoa văn nan mây đan khít nhìn đẹp và chắc chắn quá!',
       },
     ],
@@ -850,9 +850,9 @@ export const STATIONS_DATA: Station[] = [
         text: 'Sau chặng đường dài, chú mời hai cháu thưởng thức món Cơm Lam dẻo thơm nướng trong ống nứa bánh tẻ nhé!',
       },
       {
-        speaker: 'An',
-        avatar: 'an',
-        role: 'Học sinh',
+        speaker: 'Kiến Sáng',
+        avatar: 'kiensang',
+        role: 'Bạn đồng hành',
         text: 'Mùi thơm của gạo nếp nương quyện với mùi thơm của ống tre tươi nướng trên than hồng hấp dẫn quá chú ơi!',
       },
       {

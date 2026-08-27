@@ -1,11 +1,12 @@
 import React from 'react';
-import { BookOpen, Sparkles, MapPin, Award, MessageCircle, Volume2, VolumeX } from 'lucide-react';
+import { BookOpen, Sparkles, MapPin, Award, MessageCircle, FileText, Compass } from 'lucide-react';
 import { UserProgress } from '../types';
 import { FptSchoolLogo } from './FptSchoolLogo';
 
 interface HeaderNavbarProps {
   progress: UserProgress;
   onOpenNotebook: () => void;
+  onOpenSummary: () => void;
   onOpenTutor: () => void;
   onNavigateHome: () => void;
   onNavigateMap: () => void;
@@ -16,6 +17,7 @@ interface HeaderNavbarProps {
 export const HeaderNavbar: React.FC<HeaderNavbarProps> = ({
   progress,
   onOpenNotebook,
+  onOpenSummary,
   onOpenTutor,
   onNavigateHome,
   onNavigateMap,
@@ -73,7 +75,7 @@ export const HeaderNavbar: React.FC<HeaderNavbarProps> = ({
           <button
             type="button"
             onClick={onNavigateHome}
-            className={`px-3.5 py-1.5 rounded-lg text-xs font-semibold transition-all ${
+            className={`px-3.5 py-1.5 rounded-lg text-xs font-semibold transition-all cursor-pointer ${
               currentView === 'home'
                 ? 'bg-[#B35C44] text-white shadow-xs'
                 : 'text-[#5A5852] hover:text-[#2F2F2F] hover:bg-[#E2DDD3]'
@@ -85,7 +87,7 @@ export const HeaderNavbar: React.FC<HeaderNavbarProps> = ({
             type="button"
             id="btn-nav-map"
             onClick={onNavigateMap}
-            className={`px-3.5 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 transition-all ${
+            className={`px-3.5 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 transition-all cursor-pointer ${
               currentView === 'map'
                 ? 'bg-[#B35C44] text-white shadow-xs'
                 : 'text-[#5A5852] hover:text-[#2F2F2F] hover:bg-[#E2DDD3]'
@@ -94,31 +96,53 @@ export const HeaderNavbar: React.FC<HeaderNavbarProps> = ({
             <MapPin className="w-3.5 h-3.5" />
             Bản đồ 8 trạm
           </button>
-          {isAllComplete && (
-            <button
-              type="button"
-              id="btn-nav-cert"
-              onClick={onNavigateCertificate}
-              className={`px-3.5 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 transition-all ${
-                currentView === 'certificate'
-                  ? 'bg-[#2D4232] text-white shadow-xs'
-                  : 'text-[#2D4232] hover:bg-[#E2DDD3] font-bold'
-              }`}
-            >
-              <Award className="w-3.5 h-3.5 text-amber-600" />
-              Chứng nhận
-            </button>
-          )}
+          <button
+            type="button"
+            id="btn-nav-summary"
+            onClick={onOpenSummary}
+            className="px-3.5 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 transition-all text-[#5A5852] hover:text-[#B35C44] hover:bg-[#E2DDD3] cursor-pointer"
+          >
+            <FileText className="w-3.5 h-3.5 text-[#B35C44]" />
+            Tóm tắt 8 trạm
+          </button>
+          <button
+            type="button"
+            id="btn-nav-cert"
+            onClick={onNavigateCertificate}
+            className={`px-3.5 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 transition-all cursor-pointer ${
+              currentView === 'certificate'
+                ? 'bg-[#B35C44] text-white shadow-xs'
+                : isAllComplete
+                ? 'text-[#2D4232] hover:bg-[#E2DDD3] font-bold'
+                : 'text-[#5A5852] hover:text-[#2F2F2F] hover:bg-[#E2DDD3]'
+            }`}
+          >
+            <Award className={`w-3.5 h-3.5 ${isAllComplete ? 'text-amber-500' : 'text-[#B35C44]'}`} />
+            {isAllComplete ? 'Nhà Thám Hiểm' : `Chứng nhận (${completedCount}/8)`}
+          </button>
         </nav>
 
         {/* Right Actions */}
         <div className="flex items-center gap-2 sm:gap-3">
+          {/* Quick Summary Guide Button (Compact / Mobile) */}
+          <button
+            type="button"
+            id="btn-open-summary-badge"
+            onClick={onOpenSummary}
+            className="flex items-center gap-1.5 px-2.5 sm:px-3 py-1.5 rounded-xl bg-[#FAF2EB] hover:bg-[#F2E5D8] border border-[#B35C44]/30 transition-all text-xs text-[#B35C44] font-bold shadow-2xs cursor-pointer"
+            title="Xem Tóm tắt 8 Trạm di sản"
+          >
+            <FileText className="w-3.5 h-3.5" />
+            <span className="hidden sm:inline">Cẩm nang 8 Trạm</span>
+            <span className="sm:hidden">Tóm tắt</span>
+          </button>
+
           {/* Progress Stamp Badge */}
           <button
             type="button"
             id="btn-open-notebook-badge"
             onClick={onOpenNotebook}
-            className="flex items-center gap-2 px-3 py-1.5 rounded-xl bg-[#FAF8F5] hover:bg-[#EFECE6] border border-[#DDD5C7] transition-all text-xs text-[#2F2F2F] shadow-xs"
+            className="flex items-center gap-2 px-3 py-1.5 rounded-xl bg-[#FAF8F5] hover:bg-[#EFECE6] border border-[#DDD5C7] transition-all text-xs text-[#2F2F2F] shadow-xs cursor-pointer"
             title="Mở Sổ Hành Trình"
           >
             <BookOpen className="w-4 h-4 text-[#B35C44]" />
@@ -136,7 +160,7 @@ export const HeaderNavbar: React.FC<HeaderNavbarProps> = ({
             type="button"
             id="btn-open-tutor"
             onClick={onOpenTutor}
-            className="flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl bg-gradient-to-r from-[#2D4232] to-[#3B5742] hover:from-[#354F3B] hover:to-[#46664F] text-white text-xs font-semibold shadow-xs transition-all border border-[#52745B]/40 active:scale-95"
+            className="flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl bg-gradient-to-r from-[#2D4232] to-[#3B5742] hover:from-[#354F3B] hover:to-[#46664F] text-white text-xs font-semibold shadow-xs transition-all border border-[#52745B]/40 active:scale-95 cursor-pointer"
           >
             <MessageCircle className="w-3.5 h-3.5 text-emerald-200" />
             <span className="hidden md:inline">Hỏi Già Làng AI</span>

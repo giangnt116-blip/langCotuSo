@@ -12,6 +12,7 @@ import { JourneyMapView } from './components/JourneyMapView';
 import { StationDetailView } from './components/StationDetailView';
 import { CompletionCertificateView } from './components/CompletionCertificateView';
 import { JourneyNotebookModal } from './components/JourneyNotebookModal';
+import { HeritageSummaryModal } from './components/HeritageSummaryModal';
 import { CulturalTutorModal } from './components/CulturalTutorModal';
 import { FptSchoolLogo } from './components/FptSchoolLogo';
 
@@ -29,7 +30,7 @@ export default function App() {
       // ignore
     }
     return {
-      studentName: 'Minh & An',
+      studentName: '',
       completedStations: [],
       collectedStamps: [],
       notebookNotes: [],
@@ -42,6 +43,7 @@ export default function App() {
 
   // Modals state
   const [isNotebookOpen, setIsNotebookOpen] = useState(false);
+  const [isSummaryOpen, setIsSummaryOpen] = useState(false);
   const [isTutorOpen, setIsTutorOpen] = useState(false);
 
   // Save progress changes
@@ -128,6 +130,7 @@ export default function App() {
         progress={progress}
         currentView={currentView}
         onOpenNotebook={() => setIsNotebookOpen(true)}
+        onOpenSummary={() => setIsSummaryOpen(true)}
         onOpenTutor={() => setIsTutorOpen(true)}
         onNavigateHome={() => {
           setCurrentView('home');
@@ -154,6 +157,7 @@ export default function App() {
               window.scrollTo({ top: 0, behavior: 'smooth' });
             }}
             onOpenNotebook={() => setIsNotebookOpen(true)}
+            onOpenSummary={() => setIsSummaryOpen(true)}
           />
         )}
 
@@ -162,6 +166,7 @@ export default function App() {
             progress={progress}
             onSelectStation={handleSelectStation}
             onOpenNotebook={() => setIsNotebookOpen(true)}
+            onOpenSummary={() => setIsSummaryOpen(true)}
             onNavigateCertificate={() => {
               setCurrentView('certificate');
               window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -180,6 +185,10 @@ export default function App() {
             onNavigateStation={handleNavigateStation}
             onCompleteStation={handleCompleteStation}
             onSaveNote={handleSaveNote}
+            onNavigateCertificate={() => {
+              setCurrentView('certificate');
+              window.scrollTo({ top: 0, behavior: 'smooth' });
+            }}
           />
         )}
 
@@ -191,6 +200,7 @@ export default function App() {
               window.scrollTo({ top: 0, behavior: 'smooth' });
             }}
             onOpenNotebook={() => setIsNotebookOpen(true)}
+            onSelectStation={handleSelectStation}
           />
         )}
       </main>
@@ -258,11 +268,35 @@ export default function App() {
             setIsNotebookOpen(false);
             handleSelectStation(stId);
           }}
+          onOpenSummary={() => {
+            setIsNotebookOpen(false);
+            setIsSummaryOpen(true);
+          }}
+          onNavigateCertificate={() => {
+            setIsNotebookOpen(false);
+            setCurrentView('certificate');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+          }}
+        />
+      )}
+
+      {isSummaryOpen && (
+        <HeritageSummaryModal
+          isOpen={isSummaryOpen}
+          progress={progress}
+          onClose={() => setIsSummaryOpen(false)}
+          onSelectStation={(stId) => {
+            setIsSummaryOpen(false);
+            handleSelectStation(stId);
+          }}
         />
       )}
 
       {isTutorOpen && (
-        <CulturalTutorModal onClose={() => setIsTutorOpen(false)} />
+        <CulturalTutorModal
+          studentName={progress.studentName}
+          onClose={() => setIsTutorOpen(false)}
+        />
       )}
     </div>
   );

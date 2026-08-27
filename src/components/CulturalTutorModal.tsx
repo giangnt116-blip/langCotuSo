@@ -15,12 +15,22 @@ const QUICK_QUESTIONS = [
   'Nói lý – Hát lý (Bh’nooch) giúp hòa giải buôn làng ra sao?',
 ];
 
-export const CulturalTutorModal: React.FC<{ onClose: () => void }> = ({ onClose }) => {
+interface CulturalTutorModalProps {
+  studentName?: string;
+  onClose: () => void;
+}
+
+export const CulturalTutorModal: React.FC<CulturalTutorModalProps> = ({ studentName, onClose }) => {
+  const effectiveStudentName = studentName?.trim() || 'học sinh khám phá';
+  const isMultiple = effectiveStudentName.includes('&') || effectiveStudentName.includes('và');
+
   const [messages, setMessages] = useState<ChatMessage[]>([
     {
       id: 'm0',
       sender: 'bot',
-      text: 'A rơơng các cháu! Chú Bh’ling Avel và Già làng đây. Các cháu có câu hỏi hay điều gì còn băn khoăn về phong tục, kiến trúc hay lễ hội người Cơ Tu không? Cứ thoải mái hỏi chú nhé!',
+      text: isMultiple
+        ? `A rơơng các cháu ${effectiveStudentName}! Chú Bh’ling Avel và Già làng đây. Các cháu có câu hỏi hay điều gì còn băn khoăn về phong tục, kiến trúc hay lễ hội người Cơ Tu không? Cứ thoải mái hỏi chú nhé!`
+        : `A rơơng cháu ${effectiveStudentName}! Chú Bh’ling Avel và Già làng đây. Cháu có câu hỏi hay điều gì còn băn khoăn về phong tục, kiến trúc hay lễ hội người Cơ Tu không? Cứ thoải mái hỏi chú nhé!`,
       timestamp: new Date().toLocaleTimeString('vi-VN', { hour: '2-digit', minute: '2-digit' }),
     },
   ]);
@@ -46,11 +56,16 @@ export const CulturalTutorModal: React.FC<{ onClose: () => void }> = ({ onClose 
       const res = await fetch('/api/cultural-qa', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ question: textToSend }),
+        body: JSON.stringify({
+          question: textToSend,
+          studentName: effectiveStudentName,
+        }),
       });
 
       const data = await res.json();
-      const botReply = data.answer || 'Cảm ơn cháu đã quan tâm đến văn hóa Cơ Tu. Rừng Trường Sơn và buôn làng luôn chào đón các cháu khám phá di sản cha ông!';
+      const botReply =
+        data.answer ||
+        `Cảm ơn cháu ${effectiveStudentName} đã quan tâm đến văn hóa Cơ Tu. Rừng Trường Sơn và buôn làng luôn chào đón cháu khám phá di sản cha ông!`;
 
       const botMsg: ChatMessage = {
         id: `bot-${Date.now()}`,
@@ -65,7 +80,7 @@ export const CulturalTutorModal: React.FC<{ onClose: () => void }> = ({ onClose 
       const fallbackMsg: ChatMessage = {
         id: `bot-fallback-${Date.now()}`,
         sender: 'bot',
-        text: 'Người Cơ Tu luôn đề cao tính cộng đồng, sự hiếu khách và lòng tôn trọng thiên nhiên đại ngàn. Các cháu hãy tiếp tục hành trình qua 8 trạm nhé!',
+        text: `Chào ${effectiveStudentName}! Người Cơ Tu luôn đề cao tính cộng đồng, sự hiếu khách và lòng tôn trọng thiên nhiên đại ngàn. Cháu hãy tiếp tục hành trình qua 8 trạm nhé!`,
         timestamp: new Date().toLocaleTimeString('vi-VN', { hour: '2-digit', minute: '2-digit' }),
       };
       setMessages((prev) => [...prev, fallbackMsg]);
@@ -142,7 +157,7 @@ export const CulturalTutorModal: React.FC<{ onClose: () => void }> = ({ onClose 
                     : 'bg-[#EAE4D9] text-[#7A4E38] border border-[#D5CCBC]'
                 }`}
               >
-                {m.sender === 'user' ? 'Bạn' : 'Chú'}
+                {m.sender === 'user' ? (effectiveStudentName ? effectiveStudentName.charAt(0).toUpperCase() : 'Bạn') : 'Chú'}
               </div>
               <div
                 className={`max-w-[80%] p-3.5 rounded-2xl text-xs sm:text-sm leading-relaxed ${

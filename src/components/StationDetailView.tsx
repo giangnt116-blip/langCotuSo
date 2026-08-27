@@ -9,6 +9,8 @@ import { GongRhythmMinigame } from './games/GongRhythmMinigame';
 import { SpeakingSingingMinigame } from './games/SpeakingSingingMinigame';
 import { DancePoseMinigame } from './games/DancePoseMinigame';
 import { HeritageKnowledgeGallery } from './HeritageKnowledgeGallery';
+import { formatDialogueItem } from '../utils/dialogueFormatter';
+import { KienSangAvatar } from './KienSangAvatar';
 import {
   ArrowLeft,
   ArrowRight,
@@ -23,6 +25,7 @@ import {
   Volume2,
 } from 'lucide-react';
 import confetti from 'canvas-confetti';
+import { StationCertificateModal } from './StationCertificateModal';
 
 interface StationDetailViewProps {
   stationId: StationId;
@@ -31,6 +34,7 @@ interface StationDetailViewProps {
   onNavigateStation: (nextId: StationId) => void;
   onCompleteStation: (stationId: StationId) => void;
   onSaveNote: (stationId: StationId, note: string) => void;
+  onNavigateCertificate?: () => void;
 }
 
 export const StationDetailView: React.FC<StationDetailViewProps> = ({
@@ -40,10 +44,14 @@ export const StationDetailView: React.FC<StationDetailViewProps> = ({
   onNavigateStation,
   onCompleteStation,
   onSaveNote,
+  onNavigateCertificate,
 }) => {
   const station = STATIONS_DATA.find((s) => s.id === stationId) || STATIONS_DATA[0];
   const stationAsset = IMAGE_ASSETS[station.imageId] || IMAGE_ASSETS.stationGuol;
   const isCompleted = progress.completedStations.includes(station.id);
+
+  // Certificate Modal state
+  const [isCertModalOpen, setIsCertModalOpen] = useState(false);
 
   // Active Tab
   const [activeTab, setActiveTab] = useState<'content' | 'activity' | 'quiz' | 'notes'>('content');
@@ -130,9 +138,19 @@ export const StationDetailView: React.FC<StationDetailViewProps> = ({
               Trạm 0{station.order} / 08
             </span>
             {isCompleted && (
-              <span className="inline-flex items-center gap-1 text-xs font-bold text-[#2D4232] bg-emerald-100 px-3 py-1 rounded-full border border-emerald-300">
-                <CheckCircle2 className="w-3.5 h-3.5" /> Đã nhận Dấu ấn
-              </span>
+              <>
+                <span className="inline-flex items-center gap-1 text-xs font-bold text-[#2D4232] bg-emerald-100 px-3 py-1 rounded-full border border-emerald-300">
+                  <CheckCircle2 className="w-3.5 h-3.5" /> Đã nhận Dấu ấn
+                </span>
+                <button
+                  type="button"
+                  id="btn-view-station-cert-header"
+                  onClick={() => setIsCertModalOpen(true)}
+                  className="inline-flex items-center gap-1.5 text-xs font-bold text-white bg-[#B35C44] hover:bg-[#964732] px-3 py-1 rounded-full shadow-xs transition-colors cursor-pointer"
+                >
+                  <Award className="w-3.5 h-3.5" /> Giấy chứng nhận trạm
+                </button>
+              </>
             )}
           </div>
         </div>
@@ -300,27 +318,54 @@ export const StationDetailView: React.FC<StationDetailViewProps> = ({
               </div>
 
               <div className="space-y-3">
-                {station.storyDialogue.map((dialogue, idx) => (
-                  <div
-                    key={`dial-${idx}`}
-                    className="p-4 rounded-xl bg-[#F5F2ED] border border-[#DDD5C7] flex items-start gap-3"
-                  >
-                    <div className="w-8 h-8 rounded-full bg-[#EAE4D9] flex items-center justify-center font-bold text-xs text-[#7A4E38] shrink-0 border border-[#D5CCBC]">
-                      {dialogue.speaker[0]}
-                    </div>
-                    <div>
-                      <div className="flex items-center gap-2">
-                        <span className="text-xs font-bold text-[#2F2F2F]">{dialogue.speaker}</span>
-                        <span className="text-[10px] px-2 py-0.5 rounded-full bg-[#EAE4D9] text-[#7A4E38]">
-                          {dialogue.role}
-                        </span>
+                {station.storyDialogue.map((dialogue, idx) => {
+                  const formatted = formatDialogueItem(dialogue, progress.studentName);
+                  return (
+                    <div
+                      key={`dial-${idx}`}
+                      className={`p-4 rounded-xl border flex items-start gap-3 transition-colors ${
+                        formatted.isStudent
+                          ? 'bg-[#FAF2EB] border-[#B35C44]/30 shadow-2xs'
+                          : formatted.isCompanion
+                          ? 'bg-[#FFF9F0] border-[#E8A838]/40 shadow-2xs'
+                          : 'bg-[#F5F2ED] border-[#DDD5C7]'
+                      }`}
+                    >
+                      {formatted.isCompanion ? (
+                        <KienSangAvatar size="sm" showBadge={false} />
+                      ) : (
+                        <div
+                          className={`w-8 h-8 rounded-full flex items-center justify-center font-bold text-xs shrink-0 border ${
+                            formatted.isStudent
+                              ? 'bg-[#B35C44] text-white border-[#964732]'
+                              : 'bg-[#EAE4D9] text-[#7A4E38] border-[#D5CCBC]'
+                          }`}
+                        >
+                          {formatted.avatar || formatted.speaker[0]}
+                        </div>
+                      )}
+                      <div className="flex-1">
+                        <div className="flex items-center gap-2">
+                          <span className="text-xs font-bold text-[#2F2F2F]">{formatted.speaker}</span>
+                          <span
+                            className={`text-[10px] px-2 py-0.5 rounded-full ${
+                              formatted.isStudent
+                                ? 'bg-[#FAF8F5] text-[#B35C44] font-bold border border-[#B35C44]/20'
+                                : formatted.isCompanion
+                                ? 'bg-[#FFF3D6] text-[#A66300] font-bold border border-[#E8A838]/30'
+                                : 'bg-[#EAE4D9] text-[#7A4E38]'
+                            }`}
+                          >
+                            {formatted.role}
+                          </span>
+                        </div>
+                        <p className="text-xs sm:text-sm text-[#555047] mt-1 leading-relaxed">
+                          "{formatted.text}"
+                        </p>
                       </div>
-                      <p className="text-xs sm:text-sm text-[#555047] mt-1 leading-relaxed">
-                        "{dialogue.text}"
-                      </p>
                     </div>
-                  </div>
-                ))}
+                  );
+                })}
               </div>
             </div>
 
@@ -496,6 +541,35 @@ export const StationDetailView: React.FC<StationDetailViewProps> = ({
                 </div>
               );
             })()}
+
+            {/* If station is already completed or just finished, show Certificate Claim Card */}
+            {isCompleted && (
+              <div className="p-4 bg-[#FAF2EB] rounded-xl border border-[#B35C44]/40 flex flex-col sm:flex-row items-center justify-between gap-3 mt-4">
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 rounded-xl bg-[#B35C44] text-white flex items-center justify-center text-lg font-bold shadow-xs">
+                    📜
+                  </div>
+                  <div>
+                    <h4 className="text-xs sm:text-sm font-serif font-bold text-[#2F2F2F]">
+                      Giấy Chứng Nhận Hoàn Thành Trạm 0{station.order}
+                    </h4>
+                    <p className="text-[11px] text-[#7A3E2C]">
+                      Bạn đã chinh phục thành công Dấu ấn <strong>{station.stampName}</strong>. Hãy xem và tải giấy chứng nhận của bạn!
+                    </p>
+                  </div>
+                </div>
+
+                <button
+                  type="button"
+                  id="btn-open-station-cert-quiz"
+                  onClick={() => setIsCertModalOpen(true)}
+                  className="px-4 py-2 bg-[#B35C44] hover:bg-[#964732] text-white font-bold text-xs rounded-xl shadow-xs transition-all flex items-center gap-1.5 whitespace-nowrap cursor-pointer"
+                >
+                  <Award className="w-4 h-4 text-amber-200" />
+                  Xem & Tải Giấy Chứng Nhận
+                </button>
+              </div>
+            )}
           </div>
         )}
 
@@ -504,7 +578,7 @@ export const StationDetailView: React.FC<StationDetailViewProps> = ({
           <div className="bg-[#FAF8F5] p-5 sm:p-6 rounded-2xl border border-[#E3DCD2] shadow-sm space-y-4">
             <div>
               <h3 className="text-base font-serif font-bold text-[#2F2F2F]">
-                Sổ ghi chép thu hoạch kiến thức (Minh & An)
+                Sổ ghi chép thu hoạch kiến thức ({progress.studentName ? progress.studentName : 'Học sinh'} & Kiến Sáng)
               </h3>
               <p className="text-xs text-[#736B60] mt-0.5">
                 Hãy ghi lại 1-2 điều tâm đắc nhất mà bạn đã học được tại Trạm {station.order} để lưu vào Sổ Hành Trình.
@@ -564,6 +638,15 @@ export const StationDetailView: React.FC<StationDetailViewProps> = ({
             </button>
           )}
         </div>
+
+        {/* Station Certificate Modal */}
+        <StationCertificateModal
+          station={station}
+          progress={progress}
+          isOpen={isCertModalOpen}
+          onClose={() => setIsCertModalOpen(false)}
+          onViewAllCertificates={onNavigateCertificate}
+        />
 
       </div>
     </div>

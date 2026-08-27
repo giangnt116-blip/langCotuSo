@@ -11,8 +11,19 @@ import stationSpeakingImg from '../assets/images/station_speaking_art_1787811932
 import stationWoodcraftImg from '../assets/images/station_woodcraft_art_1787811950070.jpg';
 import stationDailyLifeImg from '../assets/images/station_dailylife_art_1787811965914.jpg';
 import victoryImg from '../assets/images/victory_community_1787811983312.jpg';
+import kienSangImg from '../assets/images/kien_sang_avatar_1787822813456.jpg';
 
 export const IMAGE_ASSETS: Record<string, CulturalImageAsset> = {
+  kienSang: {
+    id: 'kienSang',
+    src: kienSangImg,
+    alt: 'Logo nhân vật linh vật Kiến Sáng – Bạn đồng hành FPT Schools',
+    caption: 'Kiến Sáng – Bạn đồng hành thông minh, hiếu học của học sinh FPT Schools',
+    credit: 'FPT Schools – Thiết kế linh vật Kiến Sáng',
+    culturalStatus: 'illustration',
+    aspectRatio: '1:1',
+    focalPoint: { x: 50, y: 50 },
+  },
   hero: {
     id: 'hero',
     src: heroImg,

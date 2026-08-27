@@ -4,12 +4,13 @@ import { Station, StationId, UserProgress } from '../types';
 import { STATIONS_DATA } from '../data/culturalData';
 import { IMAGE_ASSETS } from '../data/imageAssets';
 import { CulturalImage } from './CulturalImage';
-import { CheckCircle2, Lock, ArrowRight, Sparkles, Compass, Award, BookOpen } from 'lucide-react';
+import { CheckCircle2, Lock, ArrowRight, Sparkles, Compass, Award, BookOpen, FileText } from 'lucide-react';
 
 interface JourneyMapViewProps {
   progress: UserProgress;
   onSelectStation: (stationId: StationId) => void;
   onOpenNotebook: () => void;
+  onOpenSummary: () => void;
   onNavigateCertificate: () => void;
 }
 
@@ -17,6 +18,7 @@ export const JourneyMapView: React.FC<JourneyMapViewProps> = ({
   progress,
   onSelectStation,
   onOpenNotebook,
+  onOpenSummary,
   onNavigateCertificate,
 }) => {
   const completedCount = progress.completedStations.length;
@@ -65,12 +67,24 @@ export const JourneyMapView: React.FC<JourneyMapViewProps> = ({
               </div>
             </div>
 
+            <button
+              type="button"
+              id="btn-map-open-summary"
+              onClick={onOpenSummary}
+              className="px-3.5 py-2.5 bg-[#FAF2EB] hover:bg-[#F2E5D8] text-[#B35C44] text-xs font-bold rounded-xl border border-[#B35C44]/30 flex items-center gap-1.5 transition-colors shadow-2xs cursor-pointer"
+              title="Xem Cẩm nang tóm tắt toàn bộ 8 trạm"
+            >
+              <FileText className="w-4 h-4" />
+              <span className="hidden sm:inline">Cẩm nang 8 Trạm</span>
+              <span className="sm:hidden">Tóm tắt</span>
+            </button>
+
             {isCompletedAll ? (
               <button
                 type="button"
                 id="btn-map-finish-cert"
                 onClick={onNavigateCertificate}
-                className="px-4 py-2.5 bg-gradient-to-r from-[#2D4232] to-[#3D5A44] hover:from-[#354F3C] hover:to-[#476B50] text-white text-xs font-bold rounded-xl shadow-xs flex items-center gap-1.5 animate-pulse"
+                className="px-4 py-2.5 bg-gradient-to-r from-[#2D4232] to-[#3D5A44] hover:from-[#354F3C] hover:to-[#476B50] text-white text-xs font-bold rounded-xl shadow-xs flex items-center gap-1.5 animate-pulse cursor-pointer"
               >
                 <Award className="w-4 h-4 text-amber-300" />
                 Nhận Chứng Nhận
@@ -80,7 +94,7 @@ export const JourneyMapView: React.FC<JourneyMapViewProps> = ({
                 type="button"
                 id="btn-map-open-notebook"
                 onClick={onOpenNotebook}
-                className="px-4 py-2.5 bg-[#FAF8F5] hover:bg-[#EFECE6] text-[#2F2F2F] text-xs font-bold rounded-xl border border-[#DDD5C7] flex items-center gap-1.5 transition-colors shadow-2xs"
+                className="px-4 py-2.5 bg-[#FAF8F5] hover:bg-[#EFECE6] text-[#2F2F2F] text-xs font-bold rounded-xl border border-[#DDD5C7] flex items-center gap-1.5 transition-colors shadow-2xs cursor-pointer"
               >
                 <BookOpen className="w-4 h-4 text-[#B35C44]" />
                 Sổ Hành Trình

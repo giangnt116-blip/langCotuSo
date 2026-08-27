@@ -1,14 +1,16 @@
 import React from 'react';
 import { motion } from 'motion/react';
-import { Compass, Sparkles, MapPin, CheckCircle2, Users, BookOpen, GraduationCap } from 'lucide-react';
+import { Compass, Sparkles, MapPin, CheckCircle2, Users, BookOpen, GraduationCap, FileText } from 'lucide-react';
 import { IMAGE_ASSETS } from '../data/imageAssets';
 import { CHARACTERS } from '../data/culturalData';
 import { CulturalImage } from './CulturalImage';
 import { FptSchoolLogo } from './FptSchoolLogo';
+import { KienSangAvatar } from './KienSangAvatar';
 
 interface HeroSectionProps {
   onStartJourney: () => void;
   onOpenNotebook: () => void;
+  onOpenSummary: () => void;
   studentName: string;
   onChangeName: (name: string) => void;
 }
@@ -16,6 +18,7 @@ interface HeroSectionProps {
 export const HeroSection: React.FC<HeroSectionProps> = ({
   onStartJourney,
   onOpenNotebook,
+  onOpenSummary,
   studentName,
   onChangeName,
 }) => {
@@ -81,7 +84,17 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
 
             {/* Descriptive Body */}
             <p className="text-sm sm:text-base text-[#555047] leading-relaxed max-w-xl">
-              Cùng <strong>Chú Bh’ling Avel</strong> và hai bạn học sinh <strong>Minh & An</strong> bước qua 8 trạm trải nghiệm: từ kiến trúc Nhà Gươl, kỹ nghệ dệt zèng luồn cườm, vũ điệu Tân’tung Da’dá đến thanh âm cồng chiêng và nghệ thuật Nói lý – Hát lý độc đáo.
+              Cùng <strong>Chú Bh’ling Avel</strong>, bạn đồng hành <strong>Kiến Sáng</strong> và{' '}
+              {studentName.trim() ? (
+                <span>
+                  bạn học sinh <strong>{studentName.trim()}</strong>
+                </span>
+              ) : (
+                <span>
+                  bạn học sinh khám phá <strong>Minh</strong>
+                </span>
+              )}{' '}
+              bước qua 8 trạm trải nghiệm: từ kiến trúc Nhà Gươl, kỹ nghệ dệt zèng luồn cườm, vũ điệu Tân’tung Da’dá đến thanh âm cồng chiêng và nghệ thuật Nói lý – Hát lý độc đáo.
             </p>
 
             {/* Student Name Input & Onboarding Card */}
@@ -108,22 +121,43 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
                   BẮT ĐẦU HÀNH TRÌNH
                 </button>
               </div>
-              <p className="text-[11px] text-[#736B60]">
-                * Nhập tên để in trang trọng lên Giấy chứng nhận <em>"Người bạn văn hóa Cơ Tu"</em> sau khi vượt qua 8 trạm.
-              </p>
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pt-1">
+                <p className="text-[11px] text-[#736B60]">
+                  * Nhập tên để in trang trọng lên Giấy chứng nhận <em>"Người bạn văn hóa Cơ Tu"</em>.
+                </p>
+                <button
+                  type="button"
+                  id="btn-open-summary-hero"
+                  onClick={onOpenSummary}
+                  className="inline-flex items-center gap-1.5 text-xs font-bold text-[#B35C44] hover:text-[#8C3F2B] underline decoration-[#B35C44]/40 hover:decoration-[#B35C44] cursor-pointer"
+                >
+                  <FileText className="w-3.5 h-3.5" />
+                  <span>Xem cẩm nang tóm tắt 8 trạm</span>
+                </button>
+              </div>
             </div>
 
             {/* Quick Feature Stats */}
             <div className="grid grid-cols-3 gap-3 pt-2 border-t border-[#DDD5C7]">
-              <div className="flex flex-col">
-                <span className="text-xl sm:text-2xl font-serif font-bold text-[#B35C44]">08 Trạm</span>
-                <span className="text-[11px] text-[#736B60] font-medium">Di sản trọng điểm</span>
-              </div>
-              <div className="flex flex-col">
+              <button
+                type="button"
+                onClick={onOpenSummary}
+                className="flex flex-col text-left group cursor-pointer hover:bg-white/60 p-2 rounded-xl transition-colors"
+                title="Bấm để xem tóm tắt toàn bộ 8 trạm"
+              >
+                <span className="text-xl sm:text-2xl font-serif font-bold text-[#B35C44] group-hover:underline">
+                  08 Trạm
+                </span>
+                <span className="text-[11px] text-[#736B60] font-medium flex items-center gap-1">
+                  <span>Di sản trọng điểm</span>
+                  <FileText className="w-3 h-3 text-[#B35C44]" />
+                </span>
+              </button>
+              <div className="flex flex-col p-2">
                 <span className="text-xl sm:text-2xl font-serif font-bold text-[#2D4232]">08 Dấu ấn</span>
                 <span className="text-[11px] text-[#736B60] font-medium">Khắc gỗ số thu thập</span>
               </div>
-              <div className="flex flex-col">
+              <div className="flex flex-col p-2">
                 <span className="text-xl sm:text-2xl font-serif font-bold text-[#5A5A40]">04 Di sản</span>
                 <span className="text-[11px] text-[#736B60] font-medium">Cấp Quốc gia</span>
               </div>
@@ -168,32 +202,78 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-3.5">
-            {CHARACTERS.map((char) => (
-              <div
-                key={char.id}
-                className="p-4 rounded-xl bg-[#FAF8F5] border border-[#E3DCD2] flex flex-col justify-between hover:border-[#B35C44] transition-all shadow-2xs"
-              >
-                <div>
-                  <div className="flex items-center gap-2.5 mb-2">
-                    <div className="w-8 h-8 rounded-full bg-[#EAE4D9] flex items-center justify-center font-bold text-xs text-[#7A4E38] border border-[#D5CCBC]">
-                      {char.name[0]}
+            {CHARACTERS.map((char) => {
+              const currentName = studentName.trim();
+              let displayName = char.name;
+              let displayRole = char.role;
+              let displayGreeting = char.greeting;
+              let displayDesc = char.description;
+              let isCurrentStudent = false;
+              const isCompanion = char.id === 'companion_kiensang';
+
+              if (char.id === 'student_minh') {
+                isCurrentStudent = true;
+                if (currentName) {
+                  displayName = currentName;
+                  displayRole = 'Học sinh khám phá';
+                  displayGreeting = `Chào mọi người, mình là ${currentName}! Rất hào hứng cùng chú Avel, bạn Kiến Sáng và Già làng khám phá 8 trạm di sản Cơ Tu.`;
+                  displayDesc = `Học sinh khám phá trực tiếp tham gia trải nghiệm và thu thập các dấu ấn di sản văn hóa.`;
+                }
+              } else if (char.id === 'companion_kiensang') {
+                if (currentName) {
+                  displayGreeting = `Chào bạn ${currentName}! Mình là Kiến Sáng, chúng mình cùng nhau khám phá trọn vẹn 8 trạm di sản Cơ Tu nhé!`;
+                }
+              } else if (char.id === 'guide' && currentName) {
+                displayGreeting = `A rơơng cháu ${currentName}! Chú Bh’ling Avel rất vui được đồng hành cùng cháu và bạn Kiến Sáng qua 8 trạm di sản Trường Sơn hùng vĩ.`;
+              } else if (char.id === 'artisan_elder' && currentName) {
+                displayGreeting = `Chào cháu ${currentName} và bạn Kiến Sáng! Lời nói của người Cơ Tu phải đẹp như hoa rừng, êm như suối mát cháu nhé.`;
+              }
+
+              return (
+                <div
+                  key={char.id}
+                  className={`p-4 rounded-xl border flex flex-col justify-between transition-all shadow-2xs ${
+                    isCurrentStudent && currentName
+                      ? 'bg-[#FAF2EB] border-[#B35C44]/40 shadow-xs'
+                      : isCompanion
+                      ? 'bg-[#FFFDF7] border-[#E8A838]/40 hover:border-[#E8A838] shadow-xs'
+                      : 'bg-[#FAF8F5] border-[#E3DCD2] hover:border-[#B35C44]'
+                  }`}
+                >
+                  <div>
+                    <div className="flex items-center gap-2.5 mb-2">
+                      {isCompanion ? (
+                        <KienSangAvatar size="sm" showBadge={false} />
+                      ) : (
+                        <div
+                          className={`w-8 h-8 rounded-full flex items-center justify-center font-bold text-xs border ${
+                            isCurrentStudent && currentName
+                              ? 'bg-[#B35C44] text-white border-[#964732]'
+                              : 'bg-[#EAE4D9] text-[#7A4E38] border-[#D5CCBC]'
+                          }`}
+                        >
+                          {displayName[0]}
+                        </div>
+                      )}
+                      <div>
+                        <h4 className="text-xs font-bold text-[#2F2F2F] leading-tight">{displayName}</h4>
+                        <span className={`text-[10px] font-semibold block ${isCompanion ? 'text-[#C77700]' : 'text-[#B35C44]'}`}>
+                          {displayRole}
+                        </span>
+                      </div>
                     </div>
-                    <div>
-                      <h4 className="text-xs font-bold text-[#2F2F2F] leading-tight">{char.name}</h4>
-                      <span className="text-[10px] text-[#B35C44] font-semibold block">{char.role}</span>
-                    </div>
+                    <p className="text-[11px] text-[#555047] leading-relaxed line-clamp-3">
+                      {displayDesc}
+                    </p>
                   </div>
-                  <p className="text-[11px] text-[#555047] leading-relaxed line-clamp-3">
-                    {char.description}
-                  </p>
+                  <div className="mt-3 pt-2 border-t border-[#EFEAE2]">
+                    <p className="text-[10px] italic text-[#736B60] line-clamp-2">
+                      "{displayGreeting}"
+                    </p>
+                  </div>
                 </div>
-                <div className="mt-3 pt-2 border-t border-[#EFEAE2]">
-                  <p className="text-[10px] italic text-[#736B60] line-clamp-2">
-                    "{char.greeting}"
-                  </p>
-                </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
         </div>
 
