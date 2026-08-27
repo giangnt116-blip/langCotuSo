@@ -729,27 +729,51 @@ export const STATION_HERITAGE_VISUALS: Record<string, HeritageVisualItem[]> = {
           <path d="M190 170 Q200 130 210 170" fill="#ED8936" />
           <circle cx="200" cy="155" r="8" fill="#ECC94B" opacity="0.9" />
 
-          {/* Left Elder (Speaking) */}
-          <g transform="translate(90, 85)">
-            <circle cx="25" cy="25" r="18" fill="#B35C44" />
-            <path d="M5 75 Q25 45 45 75 Z" fill="#4A5568" />
-            {/* Speech bubble */}
-            <path d="M35 15 Q65 -5 95 10 Q95 30 65 30 L50 35 Z" fill="#FAF8F5" stroke="#DDD5C7" />
-            <text x="65" y="18" textAnchor="middle" fill="#B35C44" fontSize="8" fontWeight="bold">"Lời như suối trong..."</text>
+          {/* Left Elder (Speaking / Nói Lý) */}
+          <g transform="translate(60, 80)">
+            <circle cx="30" cy="30" r="18" fill="#C58F58" />
+            <path d="M20 18 Q30 10 40 18" stroke="#3D2010" strokeWidth="4" /> {/* Turban */}
+            <path d="M10 80 Q30 48 50 80 Z" fill="#7A3B22" />
+            
+            {/* Speech bubble: Spacious & High Contrast */}
+            <g transform="translate(-40, -55)">
+              <rect x="0" y="0" width="145" height="42" rx="8" fill="#FFFFFF" stroke="#B35C44" strokeWidth="1.8" />
+              {/* Pointer Tail */}
+              <polygon points="65,42 75,52 80,42" fill="#FFFFFF" />
+              <line x1="65" y1="42" x2="75" y2="52" stroke="#B35C44" strokeWidth="1.8" />
+              <line x1="75" y1="52" x2="80" y2="42" stroke="#B35C44" strokeWidth="1.8" />
+              
+              <text x="72" y="17" textAnchor="middle" fill="#7A4E38" fontSize="8.5" fontWeight="600">NGƯỜI NÓI LÝ</text>
+              <text x="72" y="32" textAnchor="middle" fill="#8C2D19" fontSize="10.5" fontWeight="bold">"Lời như suối trong..."</text>
+            </g>
           </g>
 
-          {/* Right Elder (Listening & Responding) */}
-          <g transform="translate(250, 85)">
-            <circle cx="25" cy="25" r="18" fill="#2D4232" />
-            <path d="M5 75 Q25 45 45 75 Z" fill="#4A5568" />
-            {/* Response bubble */}
-            <path d="M15 15 Q-15 -5 -45 10 Q-45 30 -15 30 L0 35 Z" fill="#FAF8F5" stroke="#DDD5C7" />
-            <text x="-30" y="18" textAnchor="middle" fill="#2D4232" fontSize="8" fontWeight="bold">"Dạ sáng như trăng..."</text>
+          {/* Right Elder (Singing response / Hát Lý) */}
+          <g transform="translate(260, 80)">
+            <circle cx="30" cy="30" r="18" fill="#C58F58" />
+            <path d="M20 18 Q30 10 40 18" stroke="#1C3822" strokeWidth="4" /> {/* Turban */}
+            <path d="M10 80 Q30 48 50 80 Z" fill="#2D4232" />
+            
+            {/* Response bubble: Spacious & High Contrast */}
+            <g transform="translate(-25, -55)">
+              <rect x="0" y="0" width="145" height="42" rx="8" fill="#FFFFFF" stroke="#2D4232" strokeWidth="1.8" />
+              {/* Pointer Tail */}
+              <polygon points="55,42 60,52 70,42" fill="#FFFFFF" />
+              <line x1="55" y1="42" x2="60" y2="52" stroke="#2D4232" strokeWidth="1.8" />
+              <line x1="60" y1="52" x2="70" y2="42" stroke="#2D4232" strokeWidth="1.8" />
+              
+              <text x="72" y="17" textAnchor="middle" fill="#556B2F" fontSize="8.5" fontWeight="600">NGƯỜI HÁT LÝ</text>
+              <text x="72" y="32" textAnchor="middle" fill="#1C3822" fontSize="10.5" fontWeight="bold">"Dạ sáng như trăng..."</text>
+            </g>
           </g>
 
-          <text x="200" y="220" textAnchor="middle" fill="#E2E8F0" fontSize="11" fontWeight="bold">
-            Bếp lửa Gươl – Không gian thiêng trao truyền Nói lý Hát lý
-          </text>
+          {/* Caption Banner */}
+          <g transform="translate(20, 204)">
+            <rect x="0" y="0" width="360" height="24" rx="6" fill="#FFFFFF" stroke="#D4AF37" strokeWidth="1" opacity="0.95" />
+            <text x="180" y="16" textAnchor="middle" fill="#5A2416" fontSize="10" fontWeight="bold">
+              Bếp lửa Gươl – Không gian thiêng trao truyền Nói lý Hát lý (Bh’nooch)
+            </text>
+          </g>
         </svg>
       ),
     },
